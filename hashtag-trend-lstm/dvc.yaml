@@ -1,0 +1,56 @@
+stages:
+  preprocess:
+    cmd: python src/preprocessing.py data/raw.csv data/processed.csv
+    deps:
+      - src/preprocessing.py
+      - data/raw.csv
+    outs:
+      - data/processed.csv
+    params:
+      - preprocessing.min_views
+      - preprocessing.normalize
+
+  features:
+    cmd: python src/features.py data/processed.csv data/features.csv
+    deps:
+      - src/features.py
+      - data/processed.csv
+    outs:
+      - data/features.csv
+    params:
+      - features.window_size
+      - features.rate_of_change
+
+  train:
+    cmd: python scripts/train_lstm.py data/features.csv models/lstm_multitarget.pth
+    deps:
+      - scripts/train_lstm.py
+      - src/lstm_multitarget.py
+      - data/features.csv
+    outs:
+      - models/lstm_multitarget.pth
+    params:
+      - lstm.hidden_size
+      - lstm.num_layers
+      - lstm.dropout
+      - lstm.learning_rate
+      - lstm.batch_size
+      - lstm.epochs
+
+  inference:
+    cmd: python scripts/predict_lstm.py models/lstm_multitarget.pth data/features.csv data/predictions.csv
+    deps:
+      - scripts/predict_lstm.py
+      - models/lstm_multitarget.pth
+      - data/features.csv
+    outs:
+      - data/predictions.csv
+
+  report:
+    cmd: python scripts/generate_report.py data/predictions.csv reports/trend_report.txt
+    deps:
+      - scripts/generate_report.py
+      - src/trend_report.py
+      - data/predictions.csv
+    outs:
+      - reports/trend_report.txt

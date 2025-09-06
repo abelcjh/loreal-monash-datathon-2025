@@ -1,1 +1,0 @@
-# Trend decay forecasting

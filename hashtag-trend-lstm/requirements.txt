@@ -1,0 +1,35 @@
+# Core ML & Deep Learning
+torch>=2.0.0
+torchvision>=0.15.0
+torchaudio>=2.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+scikit-learn>=1.2.0
+
+# Hugging Face
+transformers>=4.30.0
+sentence-transformers>=2.2.2
+
+# LangChain
+langchain>=0.3.27
+langchain-community>=0.3.29
+openai>=1.0.0
+ 
+# API & Serving
+fastapi>=0.100.0
+uvicorn[standard]>=0.23.0
+
+# Workflow / Experiment Tracking
+dvc>=3.0.0
+dvc[gdrive]>=3.0.0   # Optional, if using Google Drive remote
+
+# Reporting / Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Testing
+pytest>=7.3.0
+pytest-mock>=3.11.1
+httpx>=0.24.0         # needed for FastAPI test client

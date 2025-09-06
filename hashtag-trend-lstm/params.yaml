@@ -1,0 +1,20 @@
+preprocessing:
+  min_views: 50
+  normalize: true
+
+features:
+  window_size: 7
+  rate_of_change: true
+
+lstm:
+  input_size: 5
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.3
+  learning_rate: 0.001
+  batch_size: 32
+  epochs: 20
+
+report:
+  emerging_threshold: 0.05   # >5% daily growth
+  decaying_threshold: -0.05  # < -5% daily growth
